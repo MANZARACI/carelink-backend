@@ -11,6 +11,7 @@ import fileUpload from "express-fileupload";
 import faceRoutes from "./routes/face.js";
 import locationRoutes from "./routes/location.js";
 import deviceRoutes from "./routes/device.js";
+import trackerRoutes from "./routes/tracker.js";
 
 faceapi.env.monkeyPatch({ Canvas, Image });
 
@@ -50,6 +51,7 @@ app.get("/", (req, res) => {
 app.use("/api/face", faceRoutes);
 app.use("/api/location", locationRoutes);
 app.use("/api/device", deviceRoutes);
+app.use("/api/tracker", trackerRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Path Not Found", 404));

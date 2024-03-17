@@ -3,9 +3,17 @@ import ExpressError from "./utils/ExpressError.js";
 
 export const isLoggedIn = async (req, res, next) => {
   try {
+    let token;
+    const { authorization } = req.headers;
     const { idToken } = req.body;
 
-    const decodedToken = await auth.verifyIdToken(idToken);
+    if (authorization) {
+      token = authorization;
+    } else {
+      token = idToken;
+    }
+
+    const decodedToken = await auth.verifyIdToken(token);
     req.uid = decodedToken.uid;
 
     next();

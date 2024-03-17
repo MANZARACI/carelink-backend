@@ -12,6 +12,15 @@ const userSchema = new mongoose.Schema({
       descriptions: Array,
     },
   ],
+  trackers: [
+    {
+      name: String,
+      values: {
+        type: Map,
+        of: Number,
+      },
+    },
+  ],
 });
 
 export const User = mongoose.model("user", userSchema);
